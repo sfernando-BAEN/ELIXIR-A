@@ -1,0 +1,3 @@
+
+#####ADD THIS LINE under the line of   ### Modeling menu in loadplugins.tcl####
+  vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"
