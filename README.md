@@ -77,7 +77,7 @@ Pharmacophore clusters have been loaded.
 ![Figure3](./Example/figures/Pharmacosphore.png)
 Refined pharmacosphores (yellow) have been generated and shown in VMD OpenGL Display window.
 ![Figure4](./Example/figures/Overlap1.jpg)
-Viewed by Schrödinger Maestro. The dengue receptor is in gray. SARS-CoV pharmacophore cluster (red) show some similar binding activities to dengue pharmacophore cluster (green).
+Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). The dengue receptor is in gray. SARS-CoV pharmacophore cluster (red) show some similar binding activities to dengue pharmacophore cluster (green).
 
 # License
 + [Apache-2.0 License](./LICENSE)
