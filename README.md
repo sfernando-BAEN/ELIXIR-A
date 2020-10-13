@@ -75,7 +75,7 @@ Pharmacophore clusters have been loaded.
 
 ### Step 3. Run the ELIXIR-A by clicking  ```Submit``` icon.
 ![Figure3](./Example/figures/Pharmacosphore.png)
-Refined pharmacosphores (yellow) have been generated and shown in VMD OpenGL Display window.
+Output pharmacophores (yellow) have been generated and shown in VMD OpenGL Display window.
 ![Figure4](./Example/figures/Overlap1.jpg)
 Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). The dengue receptor is in gray. SARS-CoV pharmacophore cluster (red) show some similar binding activities to dengue pharmacophore cluster (green).
 
