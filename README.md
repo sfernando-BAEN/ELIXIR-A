@@ -45,11 +45,17 @@ In VMD, place the [ELIXIR0.9](./ELIXIR0.9/) folder to VMD TCL plugins directory 
 Add the command in file ```/scripts/vmd/loadplugin.tcl.```
 
 Under  line 
-```### Modeling menu 
+```sh
+### Modeling menu 
 ```
 Add 
-```vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"
+```sh
+vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"
 ```
 
-If the package has been successfully installed, the ELIXIR-A tab can be found under the Extensions-Modelling tab.
+If the package has been successfully installed, ```ELIXIR-A``` can be found under the Extensions-Modelling tab.
 ![Figure1](./Example/figures/fig1.png)
+
+
+# License
++ [Apache-2.0 License](./LICENSE)
