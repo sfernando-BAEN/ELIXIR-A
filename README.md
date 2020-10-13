@@ -54,7 +54,7 @@ vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"
 ```
 
 If the package has been successfully installed, ```ELIXIR-A``` can be found under the Extensions-Modelling tab.
-![Figure1](./Example/figures/fig1.png)
+![Figure1](./Example/figures/Fig1.png)
 
 # Installation time
 The total installation time will be around 10 minutes to install all the necessary packages.
