@@ -1,7 +1,3 @@
-"""
-
-Author: Vishveswaran Jothi
-"""
 import numpy as np
 import figureplot
 import time
