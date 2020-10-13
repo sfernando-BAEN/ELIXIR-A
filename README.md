@@ -8,7 +8,7 @@ This is a  `Tcl/tk` script for the identification of active sites and pharmacoph
 - [System Requirements](#System-requirements)
 - [Installation Guide](#Installation-Guide)
 - [Expected run time](#Expected-run-time)
-- [Demo batch docking procedures](#Demo-batch-docking-procedures)
+- [Demo procedures](#Demo)
 - [License](#license)
 
 # Repo Contents
@@ -56,6 +56,14 @@ vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"
 If the package has been successfully installed, ```ELIXIR-A``` can be found under the Extensions-Modelling tab.
 ![Figure1](./Example/figures/fig1.png)
 
+# Installation time
+The total installation time will be around 10 minutes to install all the necessary packages.
+
+# Expected run time
+The expected run time should be less than a minute. (max pharmacophores for each binding site)
+
+# Demo
+This demonstration uses ELIXIR-A to find refined pharmacophores from the RNA polymerase between [SARS-CoV-2](https://www.rcsb.org/structure/7BW4) and [dengue viruses](https://www.rcsb.org/structure/6IZX).
 
 # License
 + [Apache-2.0 License](./LICENSE)
