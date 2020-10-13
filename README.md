@@ -2,13 +2,13 @@
 Enhanced Ligand Exploration and Interaction Recognition Algorithm (ELIXIR-A). ELIXIR-A, a plugin in [VMD](https://www.ks.uiuc.edu/Research/vmd/), can find similarities in the active site of the receptor under study compared to other receptors. 
 
 # Overview
-This is a  `Tcl/tk` script for the identification of active sites and pharmacophores followed by ligand/inhibitor screening step. The package also provides an overall evaluation of the performance of the entire docking simulation.
+This is a  `Tcl/tk` and  `python` script for the identification of active sites and pharmacophores followed by ligand/inhibitor screening step. The package also provides an overall evaluation of the performance of the entire docking simulation.
 
 - [Repo Contents](#Repo-Contents)
 - [System Requirements](#System-requirements)
 - [Installation Guide](#Installation-Guide)
 - [Expected run time](#Expected-run-time)
-- [Demo procedures](#Demo)
+- [Demo](#Demo)
 - [License](#license)
 
 # Repo Contents
