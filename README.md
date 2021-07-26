@@ -24,7 +24,7 @@ The package has been tested on the following systems:
 - MacOS:  macOS Mojave
 
 # Installation Guide
-To run the script, you need to install python in your environment, python versions can be 2.7.16, 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
+To run the script, you need to install python in your environment, python versions can be 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
 
 To install python on OS X & Linux:
 
