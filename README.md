@@ -40,7 +40,7 @@ pip install numpy
 ```
 
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
-In VMD, place the [ELIXIR0.9](./ELIXIR0.9/) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
+In VMD, place the [ELIXIR1.0](./ELIXIR/) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
 
 Add the command in file ```/scripts/vmd/loadplugin.tcl.```
 
