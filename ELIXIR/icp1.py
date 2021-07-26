@@ -17,7 +17,7 @@ def icp_alg(p_cl1,p_cl2,max_iter,threshold):
         # Finding the correspondence with euclidean distance
         p_cl1_d,p_cl2_d= Corres(p_cl1,p_cl2,threshold)
         if p_cl2_d==[]:
-            print "No matches were found"
+            print("No matches were found")
             return p_cl2_d
         # Now calculate the centroid for each image
         N=len(p_cl1_d)

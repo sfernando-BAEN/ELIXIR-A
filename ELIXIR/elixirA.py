@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
 
+Author: Haoqi Wang
+"""
 import pdbreader
 import icp1
 import time
@@ -10,7 +13,7 @@ import sys
 
 
 #default parameters.
-max_iter=101
+max_iter=100
 threshold=100
 
 #
@@ -57,7 +60,7 @@ pA=pA.astype(float)
 for i in range(len(pA)):
     if pA[i,0]==0 and pA[i,1]==0 and pA[i,2]==0:
         pA[i,2]=0.0000000001
-print pA
+print(pA)
 #ph2
 data3=data3[1:-1].split(" ")
 occph2=[i for i in range(len(data3)) if data3[i]=="1"]
@@ -74,8 +77,8 @@ pB=pB.astype(float)
 for i in range(len(pB)):
     if pB[i,0]==0 and pB[i,1]==0 and pB[i,2]==0:
         pB[i,2]=0.00000000001
-        print "changed"
-print pB
+        print("changed")
+print(pB)
 #data=Input.split(" ")
 ##print data
 #data=map(float,data)
@@ -165,12 +168,12 @@ def guesstype(A,B):
 
 
 
-print "the original distance is "
-print distance(pA,pB)
-print "the treated distance is "
-print distance(pA,pt_cl_2_trans)
-print len(distance(pA,pt_cl_2_trans))
-print "\n-----------------------------------------------------------------------"
+print("the original distance is ")
+print(distance(pA,pB))
+print("the treated distance is ")
+print(distance(pA,pt_cl_2_trans))
+print(len(distance(pA,pt_cl_2_trans)))
+print("\n-----------------------------------------------------------------------")
 
 Sori=Sortpoints(distance(pA,pt_cl_2_trans))
 Sicp=Sortpoints(distance(pt_cl_2_trans,pA))
@@ -183,28 +186,28 @@ s = 'ATOM      1  C2  XXXXX  99      10.500   8.000   9.000  0.00  0.00         
 fragment1=['        {\n', '            "name": "', '            "hasvec": false,\n', '            "x":', '            "y":', '            "z":', '            "radius": 1,\n', '            "enabled": true,\n', '            "vector_on": 0,\n', '            "svector": {\n', '                "x": 1,\n', '                "y": 0,\n', '                "z": 0\n', '            },\n', '            "minsize": "",\n', '            "maxsize": "",\n', '            "selected": true\n', '        }']
 fragment2=['    ],\n', '    "subset": "molport",\n', '    "ShapeModeSelect": "filter",\n', '    "inselect": "none",\n', '    "intolerance": 1,\n', '    "inshapestyle": "inshapestyle-solid",\n', '    "exselect": "none",\n', '    "extolerance": 1,\n', '    "exshapestyle": "exshapestyle-solid",\n', '    "max-orient": "",\n', '    "reduceConfs": "",\n', '    "max-hits": "",\n', '    "minMolWeight": "",\n', '    "maxMolWeight": "",\n', '    "minrotbonds": "",\n', '    "maxrotbonds": "",\n', '    "minlogp": "",\n', '    "maxlogp": "",\n', '    "minpsa": "",\n', '    "maxpsa": "",\n', '    "minaromatics": "",\n', '    "maxaromatics": "",\n', '    "minhba": "",\n', '    "maxhba": "",\n', '    "minhbd": "",\n', '    "maxhbd": "",\n', '    "LigandMolStyleSelect": "stick",\n', '    "LigandMolStyleSelectcolor": "#c8c8c8",\n', '    "ResultsMolStyleSelect": "stick",\n', '    "ResultsMolStyleSelectcolor": "#808080",\n', '    "ReceptorMolStyleSelect": "cartoonwire",\n', '    "ReceptorMolStyleSelectcolor": "#c8c8c8",\n', '    "receptorbackbone": "plainBackbone",\n', '    "surfaceopacity": 0.8,\n', '    "backgroundcolor": "whiteBackground",\n', '    "ligand": null,\n', '    "ligandFormat": null,\n', '    "receptor": null,\n', '    "recname": null,\n', '    "receptorid": null,\n', '    "view": [\n', '        0,\n', '        0,\n', '        0,\n', '        18.873262406249992,\n', '        0.6300778787272721,\n', '        0.08411783594121802,\n', '        0,\n', '        -0.7719624708592429\n', '    ]\n', '}']
 
-print "The overlapped pharmacospheres (top 5) in group 1 (original selected coordinate)"
+print("The overlapped pharmacospheres (top 5) in group 1 (original selected coordinate)")
 
 for i in range(min(len(Sori),10)):
     # print pt_cl_2_trans[i]
-    print "Name: ",pA0[Sori[i],0],"Type: ",pA0[Sori[i],1],"X:",round(pA[Sori[i]][0],3),"Y:",round(pA[Sori[i]][1],3),"Z:",round(pA[Sori[i]][2],3)
-print "The overlapped pharmacospheres (top 5) in group 2 (transformed coordinate)"
+    print("Name: ",pA0[Sori[i],0],"Type: ",pA0[Sori[i],1],"X:",round(pA[Sori[i]][0],3),"Y:",round(pA[Sori[i]][1],3),"Z:",round(pA[Sori[i]][2],3))
+print("The overlapped pharmacospheres (top 5) in group 2 (transformed coordinate)")
 
 for i in range(min(len(Sicp),10)):
     # print pt_cl_2_trans[i]
-    print "Name: ",pB0[Sicp[i],0],"Type: ",pB0[Sicp[i],1],"X:",round(pt_cl_2_trans[Sicp[i]][0],3),"Y:",round(pt_cl_2_trans[Sicp[i]][1],3),"Z:",round(pt_cl_2_trans[Sicp[i]][2],3)
+    print("Name: ",pB0[Sicp[i],0],"Type: ",pB0[Sicp[i],1],"X:",round(pt_cl_2_trans[Sicp[i]][0],3),"Y:",round(pt_cl_2_trans[Sicp[i]][1],3),"Z:",round(pt_cl_2_trans[Sicp[i]][2],3))
 
 
-print "The overlapped pharmacospheres in group 3 (preferred average coordinate based on 1 and 2)"
+print("The overlapped pharmacospheres in group 3 (preferred average coordinate based on 1 and 2)")
 for i in range(min(20,min(len(pt_cl_2_trans),len(Sori)))):
-    tmpA=0.5*(pt_cl_2_trans[Sicp[i]][0]+pA[Sori[i]][0])
-    tmpB=0.5*(pt_cl_2_trans[Sicp[i]][1]+pA[Sori[i]][1])
-    tmpC=0.5*(pt_cl_2_trans[Sicp[i]][2]+pA[Sori[i]][2])
-#    tmpA=round(pt_cl_2_trans[Sicp[i]][0],3)
-#    tmpB=round(pt_cl_2_trans[Sicp[i]][1],3)
-#    tmpC=round(pt_cl_2_trans[Sicp[i]][2],3)
+#    tmpA=0.5*(pt_cl_2_trans[Sicp[i]][0]+pA[Sori[i]][0])
+#    tmpB=0.5*(pt_cl_2_trans[Sicp[i]][1]+pA[Sori[i]][1])
+#    tmpC=0.5*(pt_cl_2_trans[Sicp[i]][2]+pA[Sori[i]][2])
+    tmpA=round(pt_cl_2_trans[Sicp[i]][0],3)
+    tmpB=round(pt_cl_2_trans[Sicp[i]][1],3)
+    tmpC=round(pt_cl_2_trans[Sicp[i]][2],3)
 #    print "Type: ",guesstype(pA0[Sori[i],1],pB0[Sicp[i],1]),"X:",round(tmpA,3),"Y:",round(tmpB,3),"Z:",round(tmpC,3)
-    print "Name: ",guesstype(pA0[Sori[i],0],pB0[Sicp[i],0]),"X:",round(tmpA,3),"Y:",round(tmpB,3),"Z:",round(tmpC,3)
+    print("Type: ",guesstype(pA0[Sori[i],1],pB0[Sicp[i],1]),"X:",round(tmpA,3),"Y:",round(tmpB,3),"Z:",round(tmpC,3))
 
 
     f = fragment1[:]
@@ -237,10 +240,10 @@ output=open(outputpath,'w+')
 for lines in outputfile:
     output.write(lines)
 output.close()
-print "The pharmit session file has been writen as pharmit.json."
+print("The pharmit session file has been writen as pharmit.json.")
 
 output=open(outputpdbpath,'w+')
 for lines in outputpdb:
     output.write(lines)
 output.close()
-print "The pdb file has been writen as output.pdb."
+print("The pdb file has been writen as output.pdb.")

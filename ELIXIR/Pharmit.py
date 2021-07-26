@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
 
+Author: Haoqi Wang
+"""
 
 outputfile=['{\n', '    "points": [\n', '        {']
 
