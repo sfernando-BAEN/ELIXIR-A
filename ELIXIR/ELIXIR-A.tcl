@@ -7,7 +7,7 @@
 ## 
 ## Script Author: Haoqi Wang
 ##
-## Date: 09/25/2018
+## Date: 07/25/2021
 ##
 ## Script name: ELIXIR-A.tcl
 
@@ -20,8 +20,9 @@
 ## 0.7 Fix mirror bugs. 
 ## 0.8 Fix mirror bugs.
 ## 0.9 Update on the JSON output
+## 1.0 Fix bugs
 
-package provide elixir 0.9
+package provide elixir 1.0
 package require tile
 variable ELIXIRDIR
 
