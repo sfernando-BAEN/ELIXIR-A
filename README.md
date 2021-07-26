@@ -31,7 +31,17 @@ To install python on OS X & Linux:
 ```sh
 sudo apt-get install python3
 ```
-
+If the python execute command is python3, change the 366th line of [ELIXIR/ELIXIR-A.tcl](./ELIXIR-A/ELIXIR/ELIXIR-A.tcl) from python to python3.
+```
+set output [exec python [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
+ $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
+```
+To python 3
+```
+set output [exec python3 [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
+ $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
+```
+ 
 To install numpy package on OS X & Linux:
 
 ```sh
