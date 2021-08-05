@@ -24,14 +24,24 @@ The package has been tested on the following systems:
 - MacOS:  macOS Mojave
 
 # Installation Guide
-To run the script, you need to install python in your environment, python versions can be 2.7.16, 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
+To run the script, you need to install python in your environment, python versions can be 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
 
 To install python on OS X & Linux:
 
 ```sh
 sudo apt-get install python3
 ```
-
+If the python execute command is python3, change the 366th line of [ELIXIR/ELIXIR-A.tcl](./ELIXIR/ELIXIR-A.tcl) from python to python3.
+```
+set output [exec python [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
+ $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
+```
+To python 3
+```
+set output [exec python3 [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
+ $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
+```
+ 
 To install numpy package on OS X & Linux:
 
 ```sh
@@ -40,7 +50,7 @@ pip install numpy
 ```
 
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
-In VMD, place the [ELIXIR0.9](./ELIXIR0.9/) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
+In VMD, place the [ELIXIR1.0](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v1.0) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
 
 Add the command in file ```/scripts/vmd/loadplugin.tcl.```
 

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
 
-
+Author: Haoqi Wang
+"""
 import numpy as np
 import re
-
 
 def extract(filename):
     with open(filename) as file:
@@ -40,7 +41,7 @@ def dimtopdb(dim,ori,num=0,gaptype=1):
         gap = [4, 7, 5, 4, 2, 4, 12, 8, 8, 6, 6, 8, 4] #6,7,8 are coors
 
     for i in range(len(Sl)):
-        Sl=map(str,Sl)
+        Sl=list(map(str,Sl))
         new+=Sl[i].rjust(gap[i])
 
     return new

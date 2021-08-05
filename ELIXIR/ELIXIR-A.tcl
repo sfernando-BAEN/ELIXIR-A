@@ -7,7 +7,7 @@
 ## 
 ## Script Author: Haoqi Wang
 ##
-## Date: 09/25/2018
+## Date: 07/25/2021
 ##
 ## Script name: ELIXIR-A.tcl
 
@@ -20,8 +20,9 @@
 ## 0.7 Fix mirror bugs. 
 ## 0.8 Fix mirror bugs.
 ## 0.9 Update on the JSON output
+## 1.0 Fix bugs
 
-package provide elixir 0.9
+package provide elixir 1.0
 package require tile
 variable ELIXIRDIR
 
@@ -39,7 +40,7 @@ namespace eval ::elixir:: {
 	variable ph1x 0.000;
 	variable ph1y 0.000;
 	variable ph1z 0.000;
-	variable ph1type "Hydrophobic";
+	variable ph1type "Default";
 	variable ph1vn "Default";
 	variable ph1data [list]
 	variable ph1indexs [list [lrepeat 50 0]];
@@ -47,7 +48,7 @@ namespace eval ::elixir:: {
 	variable ph2x 0.000;
 	variable ph2y 0.000;
 	variable ph2z 0.000;
-	variable ph2type "Hydrophobic";
+	variable ph2type "Default";
 	variable ph2vn "Default2";
 	variable ph2data [list]
 	variable ph2indexs [list [lrepeat 50 0]];
@@ -109,7 +110,7 @@ proc ::elixir::elixirgui {} {
 	grid $t.ph1.labelz -row 2 -column 5
 	grid $t.ph1.label03 -row 3 -column 1
 	grid [ttk::combobox $t.ph1.listbox1 -width 18 -textvariable ::elixir::ph1type \
-	 	-values [list Hydrophobic Armoatic HydrogenDonor HydeogenAcceptor Posititvelon Negativelon ExclusionSphere] -state readonly] \
+	 	-values [list Default Hydrophobic Aromatic HydrogenDonor HydeogenAcceptor Positivelon Negativelon ExclusionSphere] -state readonly] \
 	 	-row 3 -column 2
 	grid $t.ph1.entryx -row 3 -column 3
 	grid $t.ph1.entryy -row 3 -column 4
@@ -159,7 +160,7 @@ proc ::elixir::elixirgui {} {
 	grid $t.ph2.labelz -row 2 -column 5
 	grid $t.ph2.label03 -row 3 -column 1
 	grid [ttk::combobox $t.ph2.listbox1 -width 18 -textvariable ::elixir::ph2type \
-	 	-values [list Hydrophobic Armoatic HydrogenDonor HydeogenAcceptor Posititvelon Negativelon ExclusionSphere] -state readonly] \
+	 	-values [list Default Hydrophobic Aromatic HydrogenDonor HydeogenAcceptor Positivelon Negativelon ExclusionSphere] -state readonly] \
 	 	-row 3 -column 2
 	grid $t.ph2.entryx -row 3 -column 3
 	grid $t.ph2.entryy -row 3 -column 4
@@ -238,7 +239,7 @@ proc ::elixir::openprotein {} \
 
 	for {set i 0} {$i < [[atomselect $ph1id all] num]} {incr i} {
 		set ::elixir::ph1vn [lindex [[atomselect $ph1id all] get resname] $i]
-		set ::elixir::ph1type "Hydrophobic"
+		set ::elixir::ph1type "Default"
 		set ::elixir::ph1x [lindex [[atomselect $ph1id all] get x] $i]
 		set ::elixir::ph1y [lindex [[atomselect $ph1id all] get y] $i]
 		set ::elixir::ph1z [lindex [[atomselect $ph1id all] get z] $i]
@@ -323,7 +324,7 @@ proc ::elixir::openprotein2 {} \
 
 	for {set i 0} {$i < [[atomselect $ph2id all] num]} {incr i} {
 		set ::elixir::ph2vn [lindex [[atomselect $ph2id all] get resname] $i]
-		set ::elixir::ph2type "Hydrophobic"
+		set ::elixir::ph2type "Default"
 		set ::elixir::ph2x [lindex [[atomselect $ph2id all] get x] $i]
 		set ::elixir::ph2y [lindex [[atomselect $ph2id all] get y] $i]
 		set ::elixir::ph2z [lindex [[atomselect $ph2id all] get z] $i]
