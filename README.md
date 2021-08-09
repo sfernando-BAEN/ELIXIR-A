@@ -13,7 +13,7 @@ This is a  `Tcl/tk` and  `python` script for the identification of active sites 
 
 # Repo Contents
 
-- [ELIXIR](./ELIXIR0.9/): `Tcl/tk` source code with data input
+- [ELIXIR](./ELIXIR/): `Tcl/tk` source code with data input
 - [Example](./Example/): Demo with sample inputs and outputs
 
 # System Requirements
