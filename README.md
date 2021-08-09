@@ -50,7 +50,7 @@ pip install numpy
 ```
 
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
-In VMD, place the [ELIXIR1.0](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v1.0) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
+In VMD, place the [ELIXIR2.0](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v1.0) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
 
 Add the command in file ```/scripts/vmd/loadplugin.tcl.```
 
@@ -85,7 +85,7 @@ Pharmacophore clusters have been loaded.
 
 ### Step 3. Run the ELIXIR-A by clicking  ```Submit``` icon.
 ![Figure3](./Example/figures/Pharmacosphore.png)
-Output pharmacophores (yellow) have been generated and shown in VMD OpenGL Display window.
+Output pharmacophores have been generated and shown in VMD OpenGL Display window.
 ![Figure4](./Example/figures/Overlap1.jpg)
 Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). The dengue receptor is in gray. SARS-CoV pharmacophore cluster (red) show some similar binding activities to dengue pharmacophore cluster (green).
 
