@@ -167,7 +167,7 @@ color Display Background white
 
 set pdbdir $::elixir::inputfolder_1$::elixir::suffix1
 set outputpdb1 [mol new $pdbdir]
-mol addrep $outputpdb1
+#mol addrep $outputpdb1
 mol modstyle 0 $outputpdb1 vDw 0.3
 mol modcolor 0 $outputpdb1 colorID 3
 mol modselect 0 $outputpdb1 "resname is HAC"
@@ -200,7 +200,7 @@ mol modselect 5 $outputpdb1 "resname is PIO"
 
 set pdbdir $::elixir::inputfolder_2$::elixir::suffix2
 set outputpdb2 [mol new $pdbdir]
-mol addrep $outputpdb2
+#mol addrep $outputpdb2
 mol modstyle 0 $outputpdb2 vDw 0.5
 mol modcolor 0 $outputpdb2 colorID 3
 mol modselect 0 $outputpdb2 "resname is HAC"

@@ -261,8 +261,8 @@ if not pharm_2_cicp.colors:
 # In[16]:
 
 
-import mpl_toolkits.mplot3d
-import matplotlib.pyplot as plt
+#import mpl_toolkits.mplot3d
+#import matplotlib.pyplot as plt
 
 # fig = plt.figure()
 # ax = fig.add_subplot(111, projection='3d')
@@ -341,7 +341,7 @@ if extend_colored_icp == True:
 # In[20]:
 
 
-fig2 = plt.figure()
+#fig2 = plt.figure()
 
 source_np_plot=copy.deepcopy(source_input_np)
 
