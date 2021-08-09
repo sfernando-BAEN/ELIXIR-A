@@ -76,7 +76,7 @@ In VMD OpenGL Display window, the first pharmacophore cluster will be shown as  
 Pharmacophore clusters have been loaded.
 
 ### Step 3. Run the ELIXIR-A by clicking  ```Submit``` icon.
-<img src="./Example/figures/Pharmacosphore.png" width="200" height="290">
+<img src="./Example/figures/Pharmacosphore.png" width="200">
 
 
 Output pharmacophores have been generated and shown in VMD OpenGL Display window.
