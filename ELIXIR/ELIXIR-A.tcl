@@ -104,7 +104,7 @@ proc ::elixir::elixirgui {} {
 	label $t.pm.g_label_1 -text "Global registration with RANSAC iteration"
 	
 	entry $t.pm.gvoxel -width 5 -textvariable ::elixir::g_voxel
-	label $t.pm.gvoxel_l -text "Voxel size (Å):"
+	label $t.pm.gvoxel_l -text "Voxel size:"
 
 	label $t.pm.cicp_1 -text "Colored point cloud registration"
 	entry $t.pm.iters -width 5 -textvariable ::elixir::iter
@@ -158,21 +158,83 @@ proc ::elixir::elixirgui {} {
 proc ::elixir::call_python {} {
 
 set output [exec $::elixir::pyt [file join $::env(ELIXIRDIR) "ELIXIR-A_open3d.py"] $::elixir::inputfolder_1 $::elixir::inputfolder_2 \
-$::elixir::g_voxel $::elixir::iter $::elixir::rfit $::elixir::rrmse]
+$::elixir::g_voxel $::elixir::iter $::elixir::rfit $::elixir::rrmse $::elixir::dthreshold]
 
 puts $output
 
 foreach i [molinfo list] { mol delete $i }
+color Display Background white
 
 set pdbdir $::elixir::inputfolder_1$::elixir::suffix1
 set outputpdb1 [mol new $pdbdir]
-mol modstyle 0 $outputpdb1 vDw 0.5
-mol modcolor 0 $outputpdb1 colorID 4
+mol addrep $outputpdb1
+mol modstyle 0 $outputpdb1 vDw 0.3
+mol modcolor 0 $outputpdb1 colorID 3
+mol modselect 0 $outputpdb1 "resname is HAC"
+
+mol addrep $outputpdb1
+mol modstyle 1 $outputpdb1 vDw 0.3
+mol modcolor 1 $outputpdb1 colorID 6
+mol modselect 1 $outputpdb1 "resname is HDR"
+
+mol addrep $outputpdb1
+mol modstyle 2 $outputpdb1 vDw 0.6
+mol modcolor 2 $outputpdb1 colorID 7
+mol modselect 2 $outputpdb1 "resname is HPB"
+
+mol addrep $outputpdb1
+mol modstyle 3 $outputpdb1 vDw 0.66
+mol modcolor 3 $outputpdb1 colorID 11
+mol modselect 3 $outputpdb1 "resname is ARO"
+
+mol addrep $outputpdb1
+mol modstyle 4 $outputpdb1 vDw 0.45
+mol modcolor 4 $outputpdb1 colorID 1
+mol modselect 4 $outputpdb1 "resname is NIO"
+
+mol addrep $outputpdb1
+mol modstyle 5 $outputpdb1 vDw 0.45
+mol modcolor 5 $outputpdb1 colorID 0
+mol modselect 5 $outputpdb1 "resname is PIO"
+
 
 set pdbdir $::elixir::inputfolder_2$::elixir::suffix2
 set outputpdb2 [mol new $pdbdir]
+mol addrep $outputpdb2
 mol modstyle 0 $outputpdb2 vDw 0.5
-mol modcolor 0 $outputpdb2 colorID 1
+mol modcolor 0 $outputpdb2 colorID 3
+mol modselect 0 $outputpdb2 "resname is HAC"
+mol modmaterial 0 $outputpdb2 Transparent
+
+mol addrep $outputpdb2
+mol modstyle 1 $outputpdb2 vDw 0.5
+mol modcolor 1 $outputpdb2 colorID 6
+mol modselect 1 $outputpdb2 "resname is HDR"
+mol modmaterial 1 $outputpdb2 Transparent
+
+mol addrep $outputpdb2
+mol modstyle 2 $outputpdb2 vDw 1.0
+mol modcolor 2 $outputpdb2 colorID 7
+mol modselect 2 $outputpdb2 "resname is HPB"
+mol modmaterial 2 $outputpdb2 Transparent
+
+mol addrep $outputpdb2
+mol modstyle 3 $outputpdb2 vDw 1.1
+mol modcolor 3 $outputpdb2 colorID 11
+mol modselect 3 $outputpdb2 "resname is ARO"
+mol modmaterial 3 $outputpdb2 Transparent
+
+mol addrep $outputpdb2
+mol modstyle 4 $outputpdb2 vDw 0.75
+mol modcolor 4 $outputpdb2 colorID 1
+mol modselect 4 $outputpdb2 "resname is NIO"
+mol modmaterial 4 $outputpdb2 Transparent
+
+mol addrep $outputpdb2
+mol modstyle 5 $outputpdb2 vDw 0.75
+mol modcolor 5 $outputpdb2 colorID 0
+mol modselect 5 $outputpdb2 "resname is PIO"
+mol modmaterial 5 $outputpdb2 Transparent
 }
 
 

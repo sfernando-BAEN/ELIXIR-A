@@ -135,8 +135,7 @@ if len(data0)>4 and data0[-4:]=='json':
     #data0+='.pdb'
 elif len(data0)>3 and data0[-3:]=='pdb':
     data0pdb= data0
-else:
-    return "File format is not correct. Please Check again."
+
 
 if len(data1)>4 and data1[-4:]=='json':
     jsontopdb.exportpdbdata(data1)
@@ -144,9 +143,6 @@ if len(data1)>4 and data1[-4:]=='json':
     data1pdb= data1 + '.pdb'
 elif len(data1)>3 and data1[-3:]=='pdb':
     data1pdb= data1
-else:
-    return "File format is not correct. Please Check again."
-    
 
 source_input = PandasPdb().read_pdb(data0pdb)
 target_input = PandasPdb().read_pdb(data1pdb)
@@ -236,7 +232,6 @@ print(result_ransac)
 
 # pharm_1.paint_uniform_color([1, 0.706, 0])
 # pharm_2.paint_uniform_color([1, 0.706, 0])
-pharm_2_down.colors
 
 
 # In[28]:
@@ -251,7 +246,6 @@ pharm_2_cicp = downsample_Estimate_kdtree(pharm_2,voxel_size)
 
 #pharm_1_cicp = pharm_1.voxel_down_sample(voxel_size)
 #pharm_2_cicp = pharm_2.voxel_down_sample(voxel_size)
-pharm_1_cicp.colors
 
 
 # In[15]:
@@ -375,8 +369,9 @@ if result_cicp:
 # In[33]:
 
 
+print("The fitness ratio of RANSAC registration is ",round(result_ransac.fitness,3)*100,"%.", sep = '')
 print("The fitness ratio of colored ICP is ",round(result_cicp.fitness,3)*100,"%.", sep = '')
-
+print("The output file is saved in the same folder as the input file.")
 
 # In[22]:
 
@@ -402,7 +397,7 @@ for targets in range(len(target_input_np)):
     for source_index in range(len(source_plot.points)):
         distance = np.linalg.norm(target_input_np[targets] - np.array(source_plot.points[source_index]))
         if distance <= distance_threshold:
-            print(distance) 
+            #print(distance) 
             Target_linked.append(targets)
             break
 #print(Target_linked)
@@ -425,7 +420,6 @@ target_output.df['ATOM']=target_output.df['ATOM'].loc[Target_linked,:]
 
 source_output.to_pdb(path=data0+'_source_out.pdb')
 target_output.to_pdb(path=data1+'_target_out.pdb')
-
 
 # In[ ]:
 
