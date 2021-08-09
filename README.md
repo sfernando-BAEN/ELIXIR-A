@@ -19,9 +19,7 @@ This is a  `Tcl/tk` and  `python` script for the identification of active sites 
 # System Requirements
 The package has been tested on the following systems:
 
-- Linux:  Ubuntu 16.04  
-- Linux:  Centos 3.10.0
-- MacOS:  macOS Mojave
+- MacOS:  macOS Big Sur
 
 # Installation Guide
 To run the script, you need to install python in your environment, python versions can be 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
@@ -30,16 +28,6 @@ To install python on OS X & Linux:
 
 ```sh
 sudo apt-get install python3
-```
-If the python execute command is python3, change the 366th line of [ELIXIR/ELIXIR-A.tcl](./ELIXIR/ELIXIR-A.tcl) from python to python3.
-```
-set output [exec python [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
- $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
-```
-To python 3
-```
-set output [exec python3 [file join $::env(ELIXIRDIR) "elixirA.py"] [expr {$::elixir::ph1index -1}] $::elixir::ph1indexs [expr {$::elixir::ph2index -1}] $::elixir::ph2indexs \
- $::elixir::ph1data $::elixir::ph2data $::elixir::outputfolder]
 ```
  
 To install numpy package on OS X & Linux:
