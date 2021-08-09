@@ -39,6 +39,8 @@ sudo apt install python3-pip
 pip install numpy
 ```
 
+If python3 version is not compatible with Open3D package from PyPI, it can be achieved from the [Open3D official website](http://www.open3d.org/docs/latest/getting_started.html).
+
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
 In VMD, place the [ELIXIR2.0](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v2.0) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
 
@@ -77,7 +79,7 @@ Pharmacophore clusters have been loaded.
 ![Figure3](./Example/figures/Pharmacosphore.png)  
 
 Output pharmacophores have been generated and shown in VMD OpenGL Display window.
-Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). The dengue receptor is in gray. Two pharmacophore clusters show some similar binding activities. And the refinement can be used for further drug screening.
+Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). Two pharmacophore clusters show some similar binding activities. And the refinement can be used for further drug screening.
 
 # License
 + [Apache-2.0 License](./LICENSE)
