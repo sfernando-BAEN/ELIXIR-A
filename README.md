@@ -76,7 +76,8 @@ In VMD OpenGL Display window, the first pharmacophore cluster will be shown as  
 Pharmacophore clusters have been loaded.
 
 ### Step 3. Run the ELIXIR-A by clicking  ```Submit``` icon.
-![Figure3](./Example/figures/Pharmacosphore.png){:height="200px" width="200px"}
+<Figure3 src="./Example/figures/Pharmacosphore.png" width="400" height="790">
+
 
 Output pharmacophores have been generated and shown in VMD OpenGL Display window.
 Viewed by [Schrödinger Maestro](https://www.schrodinger.com/maestro). Two pharmacophore clusters show some similar binding activities. And the refinement can be used for further drug screening.
