@@ -21,7 +21,7 @@ The package has been tested on the following systems:
 
 - MacOS:  macOS Big Sur
 - Linux: Ubuntu 20.04
-- Windows: 10
+- Windows: 10 (partially compatible)
 
 # Installation Guide
 To run the script, you need to install python in your environment, python versions can be 3.7.4 or later. The numpy package version 1.17.2 or later is required to run the algorithm. 
