@@ -34,14 +34,14 @@ namespace eval ::elixir:: {
 	variable v;
 	variable inputfolder_1 "ELIXIR-A_01.pdb"
 	variable inputfolder_2 "ELIXIR-A_01.pdb"
-	variable pyt "python3"
-	variable g_voxel "0.8"
+	variable pyt "python"
+	variable g_voxel "0.5"
 	variable iter "100"
 	variable rfit "0.1"
 	variable rrmse "0.1"
 	variable suffix1 "_source_out.pdb"
 	variable suffix2 "_target_out.pdb"
-	variable dthreshold "5"
+	variable dthreshold "2"
 }
 
 
@@ -160,7 +160,7 @@ proc ::elixir::call_python {} {
 set output [exec $::elixir::pyt [file join $::env(ELIXIRDIR) "ELIXIR-A_open3d.py"] $::elixir::inputfolder_1 $::elixir::inputfolder_2 \
 $::elixir::g_voxel $::elixir::iter $::elixir::rfit $::elixir::rrmse $::elixir::dthreshold]
 
-puts $output
+
 
 foreach i [molinfo list] { mol delete $i }
 color Display Background white
@@ -235,6 +235,8 @@ mol modstyle 5 $outputpdb2 vDw 0.75
 mol modcolor 5 $outputpdb2 colorID 0
 mol modselect 5 $outputpdb2 "resname is PIO"
 mol modmaterial 5 $outputpdb2 Transparent
+
+puts $output
 }
 
 

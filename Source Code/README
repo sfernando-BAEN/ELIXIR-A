@@ -1,8 +1,3 @@
-Package available in https://github.com/sfernando-BAEN/ELIXIR-A/releases
-
-Download "ELIXIR-A_package_download.zip"
-
-Place the "elixir2.0" folder to VMD TCL plugins directory /plugins/noarch/tcl/.
 
 #####ADD THIS LINE under the line of   ### Modeling menu in loadplugins.tcl####
   vmd_install_extension elixir elixir_tk  "Modeling/ELIXIR-A"

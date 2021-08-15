@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 import numpy as np
 import copy
 import open3d as o3d
@@ -20,16 +19,16 @@ import sys
 
 #Step 1. Fast Point Feature Histogram feature calculation
 def preprocess_point_cloud(pcd, voxel_size):
-    print(":: Downsample with a voxel size %.3f." % voxel_size)
+    #print(":: Downsample with a voxel size %.3f." % voxel_size)
     pcd_down = pcd.voxel_down_sample(voxel_size)
 
     radius_normal = voxel_size * 2
-    print(":: Estimate normal with search radius %.3f." % radius_normal)
+    #print(":: Estimate normal with search radius %.3f." % radius_normal)
     pcd_down.estimate_normals(
         o3d.geometry.KDTreeSearchParamHybrid(radius=radius_normal, max_nn=30))
 
     radius_feature = voxel_size * 5
-    print(":: Compute FPFH feature with search radius %.3f." % radius_feature)
+    #print(":: Compute FPFH feature with search radius %.3f." % radius_feature)
     pcd_fpfh = o3d.pipelines.registration.compute_fpfh_feature(
         pcd_down,
         o3d.geometry.KDTreeSearchParamHybrid(radius=radius_feature, max_nn=100))
@@ -38,7 +37,7 @@ def preprocess_point_cloud(pcd, voxel_size):
 #Step 2. Downsample with a voxel size
 #The input file is pharm_1 and pharm_2.
 def prepare_dataset(voxel_size):
-    print(":: Load two point clouds and disturb initial pose.")
+    #print(":: Load two point clouds and disturb initial pose.")
     source_1 = copy.deepcopy(pharm_1)
     target_1 = copy.deepcopy(pharm_2)
     trans_init = np.identity(4)
@@ -52,9 +51,9 @@ def prepare_dataset(voxel_size):
 def execute_global_registration(source_down, target_down, source_fpfh,
                                 target_fpfh, voxel_size):
     distance_threshold = voxel_size * 1.5
-    print(":: RANSAC registration on downsampled point clouds.")
-    print("   Since the downsampling voxel size is %.3f," % voxel_size)
-    print("   we use a liberal distance threshold %.3f." % distance_threshold)
+    #print(":: RANSAC registration on downsampled point clouds.")
+    #print("   Since the downsampling voxel size is %.3f," % voxel_size)
+    #print("   we use a liberal distance threshold %.3f." % distance_threshold)
     result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
         source_down, target_down, source_fpfh, target_fpfh, True,
         distance_threshold,
@@ -151,7 +150,7 @@ target_input = PandasPdb().read_pdb(data1pdb)
 # In[7]:
 
 
-#extract the coordinates.
+
 source_input_xyz = source_input.df['ATOM'].loc[:,['x_coord','y_coord','z_coord']]
 source_input_occ = source_input.df['ATOM'].loc[:,['occupancy']].to_numpy()
 source_input_pha = source_input.df['ATOM'].loc[:,['residue_name']].to_numpy()
@@ -163,166 +162,105 @@ target_input_pha = target_input.df['ATOM'].loc[:,['residue_name']].to_numpy()
 target_input_np=target_input_xyz.to_numpy()
 
 
-# In[8]:
+
+print("High accuracy mode")
+
+result_ransac_li=[]
+result_cicp_li=[]
+result_cicp_fi=[]
+#source_input_np_clouds=pdb_sphere.pdb_to_sphere(source_input_np,source_input_occ)
+#target_input_np_clouds=pdb_sphere.pdb_to_sphere(target_input_np,target_input_occ)
+for loop in range(5):
+    source_input_np_clouds=pdb_sphere.pdb_to_sphere(source_input_np,source_input_occ)
+    target_input_np_clouds=pdb_sphere.pdb_to_sphere(target_input_np,target_input_occ)
+
+    pharm_1 = o3d.geometry.PointCloud()
+    pharm_1.points = o3d.utility.Vector3dVector(source_input_np_clouds)
+    pharm_1.paint_uniform_color([1, 0.706, 0])
 
 
-#points to clouds
-#each pharmacophore feature is expressed using a uniform sphere of one thousand points.
-source_input_np_clouds=pdb_sphere.pdb_to_sphere(source_input_np,source_input_occ)
-target_input_np_clouds=pdb_sphere.pdb_to_sphere(target_input_np,target_input_occ)
+    pharm_2 = o3d.geometry.PointCloud()
+    pharm_2.points = o3d.utility.Vector3dVector(target_input_np_clouds)
+    pharm_2.paint_uniform_color([1, 0.706, 0])
 
-#covert the point clouds
-pharm_1 = o3d.geometry.PointCloud()
-pharm_1.points = o3d.utility.Vector3dVector(source_input_np_clouds)
-pharm_1.paint_uniform_color([1, 0.706, 0])
-#pharm_1.transform(np.asarray([[0.0, 0.0, 2.0, 0.0], [1.0, 0.0, 0.0, 2.0],
-#                             [0.0, 1.0, 1.0, 0.0], [0.0, 1.0, 0.0, 1.0]]))
-
-pharm_2 = o3d.geometry.PointCloud()
-pharm_2.points = o3d.utility.Vector3dVector(target_input_np_clouds)
-pharm_2.paint_uniform_color([1, 0.706, 0])
-
-colored_residue= True
-if colored_residue:
-    pharm_1.colors=o3d.utility.Vector3dVector(color_pharm(source_input_pha))
-    pharm_2.colors=o3d.utility.Vector3dVector(color_pharm(target_input_pha))
+    colored_residue= True
+    if colored_residue:
+        pharm_1.colors=o3d.utility.Vector3dVector(color_pharm(source_input_pha))
+        pharm_2.colors=o3d.utility.Vector3dVector(color_pharm(target_input_pha))
 
 
-# In[9]:
+    voxel_size = float(data2)
+    pharm_1_global, pharm_2_global, pharm_1_down,pharm_2_down, pharm_1_fpfh, pharm_2_fpfh = prepare_dataset(voxel_size)
 
 
-#pharm_2.colors
+    result_ransac = execute_global_registration(pharm_1_down, pharm_2_down,
+                                                pharm_1_fpfh, pharm_2_fpfh,
+                                                voxel_size)
+    #print("Now performing global registration.")
+    #print(result_ransac)
+
+    pharm_1.transform(result_ransac.transformation)
+    pharm_1_cicp = downsample_Estimate_kdtree(pharm_1,voxel_size)
+    pharm_2_cicp = downsample_Estimate_kdtree(pharm_2,voxel_size)
+
+    if not pharm_1_cicp.colors:
+        pharm_1_cicp.paint_uniform_color([1, 0.706, 0])
+        print("Colored icp is not applicable to the first pharmacophores. Running the normal ICP algorithm.")
+    if not pharm_2_cicp.colors:
+        pharm_2_cicp.paint_uniform_color([1, 0.706, 0])
+        print("Colored icp is not applicable to the second pharmacophores. Running the normal ICP algorithm.")
 
 
-# In[10]:
 
+    #print("Now performing colored icp registration.")
+    iters = int(data3)
+    r_fitness = float(data4)
+    r_rmse = float(data5)
 
-#voxel_size_list = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 1.0, 1.2, 1.5]
-#voxel_size = 0.8  # means X Å for this dataset
-voxel_size = float(data2)
-pharm_1_global, pharm_2_global, pharm_1_down,pharm_2_down, pharm_1_fpfh, pharm_2_fpfh = prepare_dataset(voxel_size)
+    result_cicp=""
+    current_transformation = np.identity(4)
 
+    extend_colored_icp=False
 
-# In[11]:
-
-
-result_ransac = execute_global_registration(pharm_1_down, pharm_2_down,
-                                            pharm_1_fpfh, pharm_2_fpfh,
-                                            voxel_size)
-print(result_ransac)
-
-
-# In[12]:
-
-
-#Optimization of voxel size (optional).
-#voxel_size = 0.8 generates the largest correspondence_set size.
-# voxel_size_list = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3, 0.5, 0.8, 1.0, 1.2, 1.5]
-# for i in voxel_size_list:
-#     pharm_1_global, pharm_2_global, pharm_1_down,pharm_2_down, pharm_1_fpfh, pharm_2_fpfh = prepare_dataset(i)
-#     result_ransac = execute_global_registration(pharm_1_down, pharm_2_down,
-#                                             pharm_1_fpfh, pharm_2_fpfh,
-#                                             i)
-#     print(pharm_1_down)
-#     print(result_ransac)
-
-
-# In[13]:
-
-
-# pharm_1.paint_uniform_color([1, 0.706, 0])
-# pharm_2.paint_uniform_color([1, 0.706, 0])
-
-
-# In[28]:
-
-
-#transfrom the source point clouds
-pharm_1.transform(result_ransac.transformation)
-
-#preporcess the clouds
-pharm_1_cicp = downsample_Estimate_kdtree(pharm_1,voxel_size)
-pharm_2_cicp = downsample_Estimate_kdtree(pharm_2,voxel_size)
-
-#pharm_1_cicp = pharm_1.voxel_down_sample(voxel_size)
-#pharm_2_cicp = pharm_2.voxel_down_sample(voxel_size)
-
-
-# In[15]:
-
-
-if not pharm_1_cicp.colors:
-    pharm_1_cicp.paint_uniform_color([1, 0.706, 0])
-if not pharm_2_cicp.colors:
-    pharm_2_cicp.paint_uniform_color([1, 0.706, 0])
-    print("Colored icp is not applicable to these datasets. Running the normal ICP algorithm.")
-
-
-# In[16]:
-
-
-#import mpl_toolkits.mplot3d
-#import matplotlib.pyplot as plt
-
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-# ax.scatter(np.array(pharm_1.points)[:,0],
-#            np.array(pharm_1.points)[:,1],
-#            np.array(pharm_1.points)[:,2],color='tab:blue');
-# ax.scatter(np.array(pharm_2.points)[:,0],
-#            np.array(pharm_2.points)[:,1],
-#            np.array(pharm_2.points)[:,2],color='tab:orange');
-# plt.show()
-
-
-# In[17]:
-
-
-#colored icp
-print("colored icp")
-#iters=1000
-iters = int(data3)
-r_fitness = float(data4)
-r_rmse = float(data5)
-
-result_cicp=""
-current_transformation = np.identity(4)
-
-extend_colored_icp=False
-
-# pharm_1.estimate_normals(
-#     o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30))
-# pharm_2.estimate_normals(
-#     o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2, max_nn=30))
-
-try:
-    result_cicp = o3d.pipelines.registration.registration_colored_icp(
-            pharm_1_cicp, pharm_2_cicp, voxel_size, current_transformation,
-            o3d.pipelines.registration.TransformationEstimationForColoredICP(),
-            o3d.pipelines.registration.ICPConvergenceCriteria(relative_fitness=r_fitness,
-                                                              relative_rmse=r_rmse,
-                                                              max_iteration=iters))
-    print(result_cicp)
-except RuntimeError:
-    extend_colored_icp=True
-    pass
-
-
-# In[19]:
-
-
-while not result_cicp:
     try:
-        print(result_cicp)
-        print("loop",r_rmse)
         result_cicp = o3d.pipelines.registration.registration_colored_icp(
                 pharm_1_cicp, pharm_2_cicp, voxel_size, current_transformation,
                 o3d.pipelines.registration.TransformationEstimationForColoredICP(),
                 o3d.pipelines.registration.ICPConvergenceCriteria(relative_fitness=r_fitness,
                                                                   relative_rmse=r_rmse,
                                                                   max_iteration=iters))
-        print(result_cicp)
-        print("loop",r_rmse)
+        #print(result_cicp)
+    except RuntimeError:
+        extend_colored_icp=True
+        pass
+    
+    
+    if result_cicp:
+        result_ransac_li.append(result_ransac)
+        result_cicp_li.append(result_cicp)
+        result_cicp_fi.append(round(result_cicp.fitness,3))
+        #print("The fitness ratio of colored ICP is ",round(result_cicp.fitness,3)*100,"%.", sep = '')
+    
+#Find the best match
+if len(result_ransac_li) == len(result_cicp_li):
+    result_cicp=result_cicp_li[result_cicp_fi.index(max(result_cicp_fi))]
+    result_ransac=result_ransac_li[result_cicp_fi.index(max(result_cicp_fi))]
+    #print("Possible registrations were found with the following values:",result_cicp_fi)
+    
+    
+    
+while not result_cicp:
+    try:
+        #print(result_cicp)
+        #print("loop",r_rmse)
+        result_cicp = o3d.pipelines.registration.registration_colored_icp(
+                pharm_1_cicp, pharm_2_cicp, voxel_size, current_transformation,
+                o3d.pipelines.registration.TransformationEstimationForColoredICP(),
+                o3d.pipelines.registration.ICPConvergenceCriteria(relative_fitness=r_fitness,
+                                                                  relative_rmse=r_rmse,
+                                                                  max_iteration=iters))
+        #print(result_cicp)
+        #print("loop",r_rmse)
     except RuntimeError:
         r_fitness*=10
         r_rmse*=10
@@ -338,10 +276,9 @@ if extend_colored_icp == True:
         print(result_cicp)
 
 
-# In[20]:
+        
+        
 
-
-#fig2 = plt.figure()
 
 source_np_plot=copy.deepcopy(source_input_np)
 
@@ -356,24 +293,16 @@ if result_cicp:
     if result_cicp.fitness != 0:
         source_plot.transform(result_cicp.transformation)
 
-# ax = fig2.add_subplot(111, projection='3d')
-# ax.scatter(np.array(source_plot.points)[:,0],
-#            np.array(source_plot.points)[:,1],
-#            np.array(source_plot.points)[:,2],color='tab:blue');
-# ax.scatter(np.array(target_input_np)[:,0],
-#            np.array(target_input_np)[:,1],
-#            np.array(target_input_np)[:,2],color='tab:orange');
-# plt.show()
+print("Now performing global registration.")
+print(result_ransac)
+print("Now performing colored icp registration.")
+print(result_cicp)
+        
 
-
-# In[33]:
-
-
-print("The fitness ratio of RANSAC registration is ",round(result_ransac.fitness,3)*100,"%.", sep = '')
-print("The fitness ratio of colored ICP is ",round(result_cicp.fitness,3)*100,"%.", sep = '')
+print("The fitness ratio of RANSAC registration is ",round(result_ransac.fitness*100,3),"%.", sep = '')
+print("The fitness ratio of colored ICP is ",round(result_cicp.fitness*100,3),"%.", sep = '')
 print("The output file is saved in the same folder as the input file.")
 
-# In[22]:
 
 
 distance_threshold = float(data6) # Select the point pairs within input value.
@@ -383,13 +312,8 @@ for source_index in range(len(source_plot.points)):
     for targets in target_input_np:
         distance = np.linalg.norm(targets - np.array(source_plot.points[source_index]))
         if distance <= distance_threshold:
-#             print(distance) 
             Source_linked.append(source_index)
             break
-# print(Source_linked)
-
-
-# In[23]:
 
 
 Target_linked=[]
@@ -397,13 +321,10 @@ for targets in range(len(target_input_np)):
     for source_index in range(len(source_plot.points)):
         distance = np.linalg.norm(target_input_np[targets] - np.array(source_plot.points[source_index]))
         if distance <= distance_threshold:
-            #print(distance) 
+            
             Target_linked.append(targets)
             break
-#print(Target_linked)
 
-
-# In[24]:
 
 
 source_output = copy.deepcopy(source_input)
