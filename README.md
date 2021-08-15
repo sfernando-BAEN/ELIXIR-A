@@ -26,8 +26,8 @@ The package has been tested on the following systems:
 # Installation Guide
 To run the script, you need to install python in your environment, python versions can be 3.7.4 or later.   
 The numpy package version 1.20.1 or later is required to run the algorithm.  
-The open3d package version 1.20.1 or later is required to run the algorithm.  
-The biopandas package version 1.20.1 or later is required to run the algorithm.  
+The open3d package version 0.13.0 or later is required to run the algorithm.  
+The biopandas package version 0.28.0 or later is required to run the algorithm.  
 
 To install python on OS X & Linux:
 
