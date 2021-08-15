@@ -65,10 +65,10 @@ If the package has been successfully installed, ```ELIXIR-A``` can be found unde
 <img src="./Example/figures/fig1.png" width="600">
 
 # Installation time
-The total installation time will be about 10 minutes to install all the necessary packages.
+The total installation time will be about 30 minutes to install all the necessary packages.
 
 # Expected run time
-The expected run time should be less than a minute. (max pharmacophores for each binding site)
+The expected run time should be less than a minute.
 
 # Demo
 This demonstration uses ELIXIR-A to find refined pharmacophores from the RNA polymerase from dengue viruses [5I3P](https://www.rcsb.org/structure/5I3P) and [5I3Q](https://www.rcsb.org/structure/5I3Q).
