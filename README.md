@@ -42,7 +42,9 @@ pip install numpy
 If python3 version is not compatible with Open3D package from PyPI, the . WHL package install file can be achieved from the [Open3D official website](http://www.open3d.org/docs/latest/getting_started.html).
 
 For conda users, the latest version of Biopandas package can be achieved from the  [Biopandas official website](http://rasbt.github.io/biopandas/installation/).  
-```pip install git+git://github.com/rasbt/biopandas.git```  
+```sh
+pip install git+git://github.com/rasbt/biopandas.git
+```    
 
 
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
