@@ -22,7 +22,7 @@
 ## 0.9 Update on the JSON output
 ## 1.0 Fix bugs
 
-package provide elixir 2.0
+package provide elixir 1.0
 package require tile
 variable ELIXIRDIR
 
