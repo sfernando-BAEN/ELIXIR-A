@@ -13,8 +13,8 @@ This is a  `Tcl/tk` and  `python` script for the identification of active sites 
 
 # Repo Contents
 
-- [ELIXIR](./ELIXIR/): `Tcl/tk` source code with data input
-- [Example](./Source%20Code/): Demo with sample inputs and outputs
+- [ELIXIR](./Source%20Code/): `Tcl/tk` source code with data input
+- [Example](./Example/): Demo with sample inputs and outputs
 
 # System Requirements
 The package has been tested on the following systems:
