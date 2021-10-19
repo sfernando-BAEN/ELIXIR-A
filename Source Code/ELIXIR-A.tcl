@@ -19,11 +19,12 @@
 ## 0.6 Update the appearance.
 ## 0.7 Fix mirror bugs. 
 ## 0.8 Fix mirror bugs.
-## 0.9 Update on the JSON output
-## 1.0 Fix bugs
-## 2.0 Use open3d as the source of icp algorithm 
+## 0.9 Update on the JSON output.
+## 1.0 Fix bugs.
+## 2.0 Use open3d as the source of icp algorithm.
+## 2.1 Receptor protein can be loaded via the GUI.
 
-package provide elixir 2.0
+package provide elixir 2.1
 package require tile
 variable ELIXIRDIR
 
@@ -33,7 +34,8 @@ namespace eval ::elixir:: {
 	variable t;
 	variable v;
 	variable inputfolder_1 "ELIXIR-A_01.pdb"
-	variable inputfolder_2 "ELIXIR-A_01.pdb"
+	variable inputfolder_2 "ELIXIR-A_02.pdb"
+	variable inputfolder_3 ""
 	variable pyt "python"
 	variable g_voxel "0.5"
 	variable iter "100"
@@ -99,6 +101,41 @@ proc ::elixir::elixirgui {} {
 	grid $t.ip2.browse      -row 2 -column 3 -columnspan 1 -sticky w
     #pack $t.ip2
 
+    #Recepotor
+	frame $t.re2
+	label $t.re2.label00 -text "\nTarget receptor. Please load the receptor after submission of pharmacopeial refinement. (Optional)"
+	label $t.re2.label01 -text "Input pdb file:"
+	entry $t.re2.cd -textvariable ::elixir::inputfolder_3 -width 39
+
+	button $t.re2.browse -width 6 -text "Browse" -command {
+		set tmp [tk_getOpenFile]
+		if {![string equal $tmp ""]} {
+			set ::elixir::inputfolder_3 $tmp
+		}
+	}
+
+	button $t.re2.load -width 6 -text "Load" -command {
+		if {![string equal $::elixir::inputfolder_3 ""]} {
+			set pdbdir $::elixir::inputfolder_3
+			set outputpdb3 [mol new $pdbdir]
+			#mol addrep $outputpdb1
+			mol modstyle 0 $outputpdb3 NewCartoon
+			mol modcolor 0 $outputpdb3 colorID 10
+			mol modselect 0 $outputpdb3 "protein"
+
+			mol addrep $outputpdb3
+			mol modstyle 1 $outputpdb3 Bonds
+			mol modcolor 1 $outputpdb3 Name
+			mol modselect 1 $outputpdb3 "not protein and not water"
+		}
+	}
+	#geometry box
+	grid $t.re2.label00     -row 1 -column 1 -columnspan 4 -sticky w 
+	grid $t.re2.label01     -row 2 -column 1 -columnspan 1 -sticky w 
+	grid $t.re2.cd          -row 2 -column 2 -columnspan 1 -sticky w 
+	grid $t.re2.browse      -row 2 -column 3 -columnspan 1 -sticky w
+    grid $t.re2.load        -row 2 -column 4 -columnspan 1 -sticky w
+
 	#Parameter
 	labelframe $t.pm -text "Input parameter" -padx 2 -pady 4
 	label $t.pm.g_label_1 -text "Global registration with RANSAC iteration"
@@ -140,15 +177,16 @@ proc ::elixir::elixirgui {} {
 
 	#set some buttons for the function
 	frame $t.bot
-	button $t.bot.s -text "Submit" -width 56 -command ::elixir::call_python
+	button $t.bot.s -text "Submit" -width 70 -command ::elixir::call_python
 	grid $t.bot.s -row 1 -column 1 -columnspan 1 -sticky we
 
 
 	grid $t.ip1 -row 1 -column 1 -columnspan 3 -sticky we -padx 2 -pady 3
 	grid $t.ip2 -row 2 -column 1 -columnspan 3 -sticky we -padx 2 -pady 3
-	grid $t.pm -row 3 -column 1 -columnspan 3 -sticky we -padx 6 -pady 3
-	grid $t.op -row 4 -column 1 -columnspan 3 -sticky we -padx 2 -pady 3
-	grid $t.bot -row 5 -column 1 -columnspan 1 -sticky we -padx 6 -pady 3
+	grid $t.re2 -row 3 -column 1 -columnspan 4 -sticky we -padx 2 -pady 3
+	grid $t.pm -row 4 -column 1 -columnspan 3 -sticky we -padx 6 -pady 3
+	grid $t.op -row 5 -column 1 -columnspan 3 -sticky we -padx 2 -pady 3
+	grid $t.bot -row 6 -column 1 -columnspan 1 -sticky we -padx 6 -pady 3
 
 	return $t
 
