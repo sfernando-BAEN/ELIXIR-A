@@ -1,13 +1,13 @@
 ##
 ## ELIXIR-A
 ##
-## A script to add two cluster of pharmacophores into one cluster
+## A script to add two clusters of pharmacophores into one cluster
 ##
 ## The algorithm is copyrighted by Dr. Sandun Fernando
 ## 
 ## Script Author: Haoqi Wang
 ##
-## Date: 07/25/2021
+## Date: 10/20/2021
 ##
 ## Script name: ELIXIR-A.tcl
 
