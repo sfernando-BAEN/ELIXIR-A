@@ -1,0 +1,179 @@
+{
+    "points": [
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":1.0,
+            "y":1.5,
+            "z":5.0,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-2.5,
+            "y":0.0,
+            "z":1.5,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-4.5,
+            "y":4.5,
+            "z":3.0,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-6.0,
+            "y":6.5,
+            "z":4.0,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-5.5,
+            "y":-2.0,
+            "z":-2.0,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-5.0,
+            "y":-5.0,
+            "z":-0.5,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        },
+        {
+            "name": "Hydrophobic",
+            "hasvec": false,
+            "x":-6.0,
+            "y":-9.5,
+            "z":-3.0,
+            "radius": 1,
+            "enabled": true,
+            "vector_on": 0,
+            "svector": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "minsize": "",
+            "maxsize": "",
+            "selected": true
+        }
+    ],
+    "subset": "molport",
+    "ShapeModeSelect": "filter",
+    "inselect": "none",
+    "intolerance": 1,
+    "inshapestyle": "inshapestyle-solid",
+    "exselect": "none",
+    "extolerance": 1,
+    "exshapestyle": "exshapestyle-solid",
+    "max-orient": "",
+    "reduceConfs": "",
+    "max-hits": "",
+    "minMolWeight": "",
+    "maxMolWeight": "",
+    "minrotbonds": "",
+    "maxrotbonds": "",
+    "minlogp": "",
+    "maxlogp": "",
+    "minpsa": "",
+    "maxpsa": "",
+    "minaromatics": "",
+    "maxaromatics": "",
+    "minhba": "",
+    "maxhba": "",
+    "minhbd": "",
+    "maxhbd": "",
+    "LigandMolStyleSelect": "stick",
+    "LigandMolStyleSelectcolor": "#c8c8c8",
+    "ResultsMolStyleSelect": "stick",
+    "ResultsMolStyleSelectcolor": "#808080",
+    "ReceptorMolStyleSelect": "cartoonwire",
+    "ReceptorMolStyleSelectcolor": "#c8c8c8",
+    "receptorbackbone": "plainBackbone",
+    "surfaceopacity": 0.8,
+    "backgroundcolor": "whiteBackground",
+    "ligand": null,
+    "ligandFormat": null,
+    "receptor": null,
+    "recname": null,
+    "receptorid": null,
+    "view": [
+        0,
+        0,
+        0,
+        18.873262406249992,
+        0.6300778787272721,
+        0.08411783594121802,
+        0,
+        -0.7719624708592429
+    ]
+}
