@@ -10,7 +10,7 @@ from biopandas.pdb import PandasPdb
 import pdb_sphere
 import jsontopdb
 import sys
-
+import codecs,json
 
 # In[2]:
 
@@ -100,6 +100,41 @@ data4 = sys.argv[5] #relative_fitness
 data5 = sys.argv[6] #relative_rmse
 data6 = sys.argv[7] #correspondence distance
 
+
+pha_abbr={"HPB":"Hydrophobic","ARO":"Aromatic","HDR":"HydrogenDonor","HAC":"HydrogenAcceptor","PIO":"PositiveIon","NIO":"NegativeIon","ISP":"InclusionSphere"}
+
+def pdb_to_json(pdbfile,filename):
+    #pdbfile = PandasPdb().read_pdb("5I3P.json_source_out.pdb")
+    point_num=len(pdbfile.df['ATOM'])
+    tmp = {"points":[]}
+    tmp_point={}
+    tmp_point["name"]="Hydrophobic"
+    tmp_point["hasvec"]=False
+    tmp_point["x"]=1
+    tmp_point["y"]=2
+    tmp_point["z"]=3
+    tmp_point["radius"]=1
+    tmp_point["enabled"]=True
+    tmp_point["vector_on"]=0
+    tmp_point["svector"]={}
+    tmp_point["svector"]["x"]=0
+    tmp_point["svector"]["y"]=0
+    tmp_point["svector"]["z"]=0
+    tmp_point["minsize"]=""
+    tmp_point["maxsize"]=""
+    tmp_point["selected"]=False
+    for index in range(point_num):
+        if pdbfile.df['ATOM'].iloc[index,:]['residue_name'] in pha_abbr:
+            tmp_point["name"] = pha_abbr[pdbfile.df['ATOM'].iloc[index,:]['residue_name']]
+        else:
+            tmp_point["name"]="Hydrophobic" #Hydrophobic as default
+        tmp_point["x"]= pdbfile.df['ATOM'].iloc[index,:]['x_coord']
+        tmp_point["y"]= pdbfile.df['ATOM'].iloc[index,:]['y_coord']
+        tmp_point["z"]= pdbfile.df['ATOM'].iloc[index,:]['z_coord']
+        tmp_point_push=copy.deepcopy(tmp_point)
+        tmp["points"].append(tmp_point_push)
+    with codecs.open(filename+'_out.json', 'w', 'utf8') as f:
+        f.write(json.dumps(tmp, sort_keys = False, ensure_ascii=False))
 
 # In[3]:
 
@@ -342,8 +377,10 @@ target_output.df['ATOM']=target_output.df['ATOM'].loc[Target_linked,:]
 source_output.to_pdb(path=data0+'_source_out.pdb')
 target_output.to_pdb(path=data1+'_target_out.pdb')
 
-# In[ ]:
+pdb_to_json(source_output,data0)
+pdb_to_json(target_output,data1)
 
+# In[ ]:
 
 
 

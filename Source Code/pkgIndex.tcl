@@ -8,4 +8,4 @@
 # script is sourced, the variable $dir must contain the
 # full path name of this file's directory.
 
-package ifneeded elixir 2.1 "set env(ELIXIRDIR) [list $dir] ; [list source [file join $dir ELIXIR-A.tcl]]"
+package ifneeded elixir 2.11 "set env(ELIXIRDIR) [list $dir] ; [list source [file join $dir ELIXIR-A.tcl]]"
