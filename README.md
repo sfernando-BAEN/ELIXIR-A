@@ -51,7 +51,7 @@ pip install git+git://github.com/rasbt/biopandas.git
 
 
 ## [VMD](https://www.ks.uiuc.edu/Research/vmd/)  1.9.2 or later
-In VMD, place the [elixir2.0](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v2.0) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
+In VMD, place the [elixir2.1.1](https://github.com/sfernando-BAEN/ELIXIR-A/releases/tag/v2.1.1) folder to VMD TCL plugins directory ```/plugins/noarch/tcl/```
 
 Add the command in file ```/scripts/vmd/loadplugin.tcl.```
 
